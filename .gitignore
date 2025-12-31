@@ -1,0 +1,6 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+dodge_the_creeps_2d_assets.zip
+dodge_the_creeps_2d_assets
