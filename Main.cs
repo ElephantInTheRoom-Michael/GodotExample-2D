@@ -9,10 +9,21 @@ public partial class Main : Node
 
     private int _score;
     
+    private Hud _hud;
+
+    public override void _Ready()
+    {
+        base._Ready();
+
+        _hud = GetNode<Hud>("HUD");
+    }
+
     public void GameOver()
     {
         GetNode<Timer>("MobTimer").Stop();
         GetNode<Timer>("ScoreTimer").Stop();
+        
+        _hud.ShowGameOver();
     }
 
     public void NewGame()
@@ -24,11 +35,17 @@ public partial class Main : Node
         player.Start(startPosition.Position);
 
         GetNode<Timer>("StartTimer").Start();
+        
+        _hud.UpdateScore(_score);
+        _hud.ShowMessage("Get Ready!");
+        
+        GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
     }
     
     private void OnScoreTimerTimeout()
     {
         _score++;
+        _hud.UpdateScore(_score);
     }
 
     private void OnStartTimerTimeout()
