@@ -10,12 +10,16 @@ public partial class Main : Node
     private int _score;
     
     private Hud _hud;
+    private AudioStreamPlayer _musicPlayer;
+    private AudioStreamPlayer _deathSoundPlayer;
 
     public override void _Ready()
     {
         base._Ready();
 
         _hud = GetNode<Hud>("HUD");
+        _musicPlayer = GetNode<AudioStreamPlayer>("Music");
+        _deathSoundPlayer = GetNode<AudioStreamPlayer>("DeathSound");
     }
 
     public void GameOver()
@@ -24,6 +28,9 @@ public partial class Main : Node
         GetNode<Timer>("ScoreTimer").Stop();
         
         _hud.ShowGameOver();
+        
+        _musicPlayer.Stop();
+        _deathSoundPlayer.Play();
     }
 
     public void NewGame()
@@ -40,6 +47,8 @@ public partial class Main : Node
         _hud.ShowMessage("Get Ready!");
         
         GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
+        
+        _musicPlayer.Play();
     }
     
     private void OnScoreTimerTimeout()
