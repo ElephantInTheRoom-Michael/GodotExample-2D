@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dnnljh22j3bpv"]
+
+[ext_resource type="Script" uid="uid://c0m54ge114wkp" path="res://addons/displaymanager/DisplayManager.cs" id="1_hpwyr"]
+
+[node name="DisplayManager" type="Node" unique_id=1636673798]
+script = ExtResource("1_hpwyr")
